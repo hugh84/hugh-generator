@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties resource="generatorConfig.properties" />
+	<context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+
+		<!-- 指明数据库的用于标记数据库对象名的符号 -->
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+		<plugin type="com.hugh.generator.MapperExtendsPlugin">
+			<property name="mapperExtend" value="${basePackage}.BaseMapper" />
+		</plugin>
+		<plugin type="com.hugh.generator.ServiceGeneratorPlugin">
+			<property name="targetProject" value="${targetProject}" />
+			<property name="targetPackage" value="${targetPackage}.service" />
+			<property name="serviceExtend" value="${basePackage}.BaseService" />
+			<property name="serviceImplExtend" value="${basePackage}.BaseServiceImpl" />
+		</plugin>
+
+		<!-- 阻止生成注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<!-- jdbc链接配置 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="${dbUrl}" userId="${dbUser}" password="${dbPassword}">
+		</jdbcConnection>
+
+		<!-- 生成代码位置配置 -->
+		<javaModelGenerator targetPackage="${targetPackage}.model"
+			targetProject="${targetProject}" />
+		<sqlMapGenerator targetPackage="${targetPackage}.mapper.xml"
+			targetProject="${targetProject}" />
+		<javaClientGenerator targetPackage="${targetPackage}.mapper"
+			targetProject="${targetProject}" type="XMLMAPPER" />
+
+		<!-- 映射表配置 -->
+        <table tableName="tb_visit_record             " domainObjectName="VisitRecord"             enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        
+		<!-- <generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+    </context>
+</generatorConfiguration>
